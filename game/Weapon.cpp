@@ -2526,7 +2526,12 @@ void rvWeapon::Attack( bool altAttack, int num_attacks, float spread, float fuse
 		owner->inventory.UseAmmo( ammoType, ammoRequired );
 		if ( clipSize && ammoRequired ) {
  			clipPredictTime = gameLocal.time;	// mp client: we predict this. mark time so we're not confused by snapshots
-			ammoClip -= 1;
+			if (rand() % 4 != 0) {
+				ammoClip -= 1;
+			}
+			else {
+				owner->inventory.UseAmmo( ammoType, -1 );
+			}
 		}
 
 		// wake up nearby monsters
